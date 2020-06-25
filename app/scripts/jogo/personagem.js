@@ -3,6 +3,7 @@ class Personagem extends Animacao {
     matriz,
     imagem,
     x,
+    variacaoY,
     largura,
     altura,
     larguraSprite,
@@ -11,23 +12,30 @@ class Personagem extends Animacao {
       matriz,
       imagem,
       x,
+      variacaoY,
       largura,
       altura,
       larguraSprite,
       alturaSprite);
 
-    this.yInicial = height - this.altura;
+    this.yInicial = height - this.altura - this.variacaoY;
     this.y = this.yInicial;
 
-    this.gravidade = 3;
+    this.gravidade = 5;
     this.velocidadePulo = 0;
+
+    this.alturaDoPulo = -50;
+    this.pulos = 0;
 
     this.precisao = .7;
 
   }
 
   pula() {
-    this.velocidadePulo = - 50;
+    if (this.pulos < 3) {
+      this.velocidadePulo = this.alturaDoPulo;
+      this.pulos++;
+    }
   }
 
   aplicaGravidade() {
@@ -36,10 +44,11 @@ class Personagem extends Animacao {
 
     if (this.y > this.yInicial) {
       this.y = this.yInicial;
+      this.pulos = 0;
     }
   }
 
-  estaColidindo(inimigo){
+  estaColidindo(inimigo) {
     const colisao = collideRectRect(
       this.x,
       this.y,

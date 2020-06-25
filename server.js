@@ -10,13 +10,14 @@ app.use(express.urlencoded({ extended: true }));
 
 
 app.get('/', (req, res) => {
-        return res.sendFile(path.join(__dirname, 'index.html'));
+        return res.sendFile(path.join(__dirname, '/app/index.html'));
 })
 
-app.use(express.static(path.join(__dirname, '/scripts')))
-app.use(express.static(path.join(__dirname, '/images')))
-app.use(express.static(path.join(__dirname, '/sounds')))
-app.use(express.static(path.join(__dirname, '/')))
+app.use(express.static(path.join(__dirname, '/app/scripts')))
+app.use(express.static(path.join(__dirname, '/app/images')))
+app.use(express.static(path.join(__dirname, '/app/sounds')))
+app.use(express.static(path.join(__dirname, '/app/styles')))
+app.use(express.static(path.join(__dirname, '/app/')))
 
 
 const PORT = process.env.PORT || 3000;
