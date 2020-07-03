@@ -29,6 +29,8 @@ class Personagem extends Animacao {
 
     this.precisao = .7;
 
+    this.imune = false;
+
   }
 
   pula() {
@@ -49,7 +51,9 @@ class Personagem extends Animacao {
   }
 
   estaColidindo(inimigo) {
-    const colisao = collideRectRect(
+    if (this.imune) return;
+
+    return collideRectRect(
       this.x,
       this.y,
       this.largura * this.precisao,
@@ -59,7 +63,12 @@ class Personagem extends Animacao {
       inimigo.largura * this.precisao,
       inimigo.altura * this.precisao,
     )
+  }
 
-    return colisao;
+  ficaImune() {
+    this.imune = true;
+    setTimeout(() => {
+      this.imune = false;
+    }, 1000)
   }
 }
